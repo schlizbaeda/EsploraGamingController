@@ -1,12 +1,10 @@
 # Arduino Esplora Gaming Controller
 
 This Arduino sketch emulates a mouse and a keyboard subset to work as a
-USB gaming controller for a PC using the [Arduino Esplora board]
-(https://store.arduino.cc/arduino-esplora).
+USB gaming controller for a PC using the [Arduino Esplora board](https://store.arduino.cc/arduino-esplora).
 
-It was inspired by the original Arduino sketch [Esplora Joystick Mouse]
-(https://www.arduino.cc/en/Tutorial/EsploraJoystickMouse) and for the
-keyboard part by [Esplora Kart](https://www.arduino.cc/en/Tutorial/EsploraKart)
+It was inspired by the original Arduino sketch [Esplora Joystick Mouse](https://www.arduino.cc/en/Tutorial/EsploraJoystickMouse)
+and for the keyboard part by [Esplora Kart](https://www.arduino.cc/en/Tutorial/EsploraKart).
 
 ## Implemented Features
 * smooth mouse movement with joystick using binary fixed-point numbers
@@ -52,10 +50,10 @@ The easiest way to adjust the mouse and keyboard emulation is to edit
 the values of the two-dimensional array variable `gl_modeKeycodes` and
 to re-flash the Arduino Esplora board.
 
-For keyboard emulation use the ASCII codes or the [extended keyboard modifiers]
-(https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers).
+For keyboard emulation use the ASCII codes or the
+[extended keyboard modifiers](https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers).
 The value 0 means mouse emulation.
-The value 255 disables this input completely.
+The value 255 disables this input device completely.
 
 When the value 0 for mouse emulation is given,
 * joystick movement emulates mouse cursor movement
