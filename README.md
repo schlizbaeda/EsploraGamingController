@@ -5,16 +5,18 @@ USB gaming controller for a PC using the [Arduino Esplora board](https://store.a
 
 It was inspired by the original Arduino sketch [Esplora Joystick Mouse](https://www.arduino.cc/en/Tutorial/EsploraJoystickMouse)
 and for the keyboard part by [Esplora Kart](https://www.arduino.cc/en/Tutorial/EsploraKart).
+The implementation of the TinkerKit connectors was discovered at [github.com/circuit69/EsploraTinkerkit](https://github.com/circuit69/EsploraTinkerkit)
 
 ## Implemented Features
 * smooth mouse movement with joystick using binary fixed-point numbers
 * scroll wheel emulation by slider potentiometer
 * right mouse click by light sensor
 * free keyboard assignments to switches 1-4
+* connection of 6 switches at the TinkerKit connectors similar to [EsploraTinkerkit](https://github.com/circuit69/EsploraTinkerkit) 
 
 ## Planned Features
-* connection of four switches at TinkerKit connectors as seen on [EsploraTinkerkit](https://github.com/circuit69/EsploraTinkerkit)
 * store configuration in the EEPROM
+* multi-character commands
 
 ## Manual
 Use the `Arduino Web Editor` or the `Arduino Desktop IDE` as described
@@ -24,15 +26,15 @@ program this sketch into the FLASH memory of the Arduino Esplora board.
 
 An Arduino Esplora board flashed with this sketch emulates a USB mouse
 and a USB keyboard. There are eight predefined modes with different key
-mappings. The mode is indicated via the Esplora's muli colour LED:
+mappings. The mode is indicated via the Esplora's multi colour LED:
 * mode 0: "common 1" - dark white
-* mode 1: "common 2" - red
-* mode 2: "MinecraftPi" - green
+* mode 1: "MinecraftPi" - red
+* mode 2: "t.b.d.: yamuplay" - green
 * mode 3: "undefined 3" - yellow
 * mode 4: "undefined 4" - blue
 * mode 5: "undefined 5" - magenta
 * mode 6: "undefined 6" - cyan
-* mode 7: "undefined 7" - white
+* mode 7: "common 2" - white
 
 When pressing the four Arduino switches at the same time the sketch
 will enter the config mode. Here the user can choose the key mapping
@@ -41,9 +43,10 @@ again the four switches at the same time. To avoid an unintended mode
 change press switch 2 or 4 at first and then the other switches.
 
 * mode 0: only keyboard emulation
-* mode 1: the switches emulate the cursor keys and the joystick the mouse
-* mode 2: Adjusted for MinecraftPi: the switches emulate "sawd" to move the player
-* mode 3-7: not defined yet
+* mode 1: adjusted for MinecraftPi: the switches emulate "sawd" to move the player
+* mode 2: reserved for [yamuplay](https://github.com/schlizbaeda/yamuplay) control
+* mode 3-6: not defined yet
+* mode 7: the switches emulate the cursor keys and the joystick the mouse
 
 ## Adjusting the Code
 The easiest way to adjust the mouse and keyboard emulation is to edit
@@ -61,6 +64,8 @@ When the value 0 for mouse emulation is given,
 * the light sensor emulates a right button mouse click
 * the slider potentiometer emulates the mouse wheel
 * the switches emulate nothing!
+* the orange TinkerKit switches emulate left/right mouse click
+* the white TinkerKit switches emulate nothing!
 
 The analogue input modules like joystick and slider potentiometer
 return a 10bit value. This 10bit resolution is used to adjust the speed
@@ -69,4 +74,7 @@ scroll wheel emulation is stopped immediately.
 The light sensor is treated as a digital input button: Shadowing the
 sensor means pressing a button and increasing light intensity means
 releasing a button.
+The two switches on each white TinkerKit connector are distinguished
+by different voltage divider circuits which result in different
+analogue values.
 
