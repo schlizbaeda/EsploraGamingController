@@ -137,21 +137,23 @@ char* gl_modeNames[8] = {
 };
 char gl_modeKeycodes[8][18] = {
   { /* gl_mode == 0: "common 1" */
-    (char)KEY_DOWN_ARROW, (char)KEY_LEFT_ARROW,  (char)KEY_UP_ARROW, (char)KEY_RIGHT_ARROW,                   /* buttons:      cursor keys            */
-    (char)KEY_LEFT_ARROW, (char)KEY_RIGHT_ARROW, (char)KEY_UP_ARROW, (char)KEY_DOWN_ARROW,  (char)KEY_RETURN, /* joystick:     cursor keys            */
-    (char)KEY_PAGE_UP,    (char)KEY_PAGE_DOWN,                                                                /* slider:       PGUP, PGDN             */
-    (char)FUNCT_DISABLED,                                                                                     /* light sensor: -- disabled --         */
-    ' ',                  (char)KEY_ESC,                                                                      /* tinkerkit or: SPACE, ESC             */
-    (char)KEY_LEFT_SHIFT, (char)KEY_RIGHT_SHIFT, (char)KEY_LEFT_CTRL, (char)KEY_LEFT_ALT},                    /* tinkerkit wh: SHIFT, CTRL, ALT       */
+    (char)KEY_DOWN_ARROW, (char)KEY_LEFT_ARROW,  (char)KEY_UP_ARROW,    (char)KEY_RIGHT_ARROW,                   /* buttons:      cursor keys              */
+    (char)KEY_LEFT_ARROW, (char)KEY_RIGHT_ARROW, (char)KEY_UP_ARROW,    (char)KEY_DOWN_ARROW,  (char)KEY_RETURN, /* joystick:     cursor keys              */
+    (char)KEY_PAGE_UP,    (char)KEY_PAGE_DOWN,                                                                   /* slider:       PGUP, PGDN               */
+    (char)FUNCT_DISABLED,                                                                                        /* light sensor: -- disabled --           */
+    ' ',                  (char)KEY_ESC,                                                                         /* tinkerkit or: SPACE, ESC               */
+    (char)KEY_LEFT_SHIFT, (char)KEY_RIGHT_SHIFT, (char)KEY_LEFT_CTRL,   (char)KEY_LEFT_ALT},                     /* tinkerkit wh: SHIFT, CTRL, ALT         */
     
   { /* gl_mode == 1: "MinecraftPi" */ 
-    's',                  'a',                   'w',                 'd',                                    /* buttons:      "sawd"                 */
-    0, 0, 0, 0, 'e' /* "e" for opening brick menu */,                                                         /* joystick:     mouse movements, "e"   */
-    0, 0,                                                                                                     /* slider:       mouse scroll wheel     */
-    (char)KEY_LEFT_SHIFT /* for creeping */,                                                                  /* light sensor: SHIFT (for creeping)   */
-    0, 0,                                                                                                     /* tinkerkit or: mouse buttons          */
-    (char)FUNCT_DISABLED, (char)FUNCT_DISABLED,  (char)KEY_ESC,       ' '},                                   /* tinkerkit wh: --, --, ESC, SPACE     */
-    
+    's',                  'a',                   'w',                   'd',                                     /* buttons:      "sawd"                   */
+    0, 0, 0, 0, 'e', /* "e" for opening brick menu */                                                            /* joystick:     mouse movements, "e"     */
+    0, 0,                                                                                                        /* slider:       mouse scroll wheel       */
+    (char)FUNCT_DISABLED,                                                                                        /* light sensor: -- disabled --           */
+    0, 0,                                                                                                        /* tinkerkit or: mouse buttons            */
+    (char)KEY_RETURN,     (char)KEY_LEFT_SHIFT,  (char)KEY_ESC,         ' '},                                    /* tinkerkit wh: SPACE, ESC, SHIFT, ENTER */
+
+
+                 
   { /* gl_mode == 2: "yamuplay" */
     0, 0, 0, 0,            /* buttons:      ...                */
     0, 0, 0, 0, 0,         /* joystick:     ...                */
@@ -628,7 +630,7 @@ void loop()
     /**** TinkerKit buttons ****/
     gl_tinkerkit = digitalRead(TINKERKIT_ORANGE_LEFT);                        // 2^0: orangeLeft
     gl_tinkerkit |= digitalRead(TINKERKIT_ORANGE_RIGHT) << 1;                 // 2^1: orangeRight
-    gl_tinkerkit |= 12; //gl_tinkerkit |= tinkerkitWhiteSwitches(readTinkerkitInput(INPUT_A)) << 2; // 2^2 - 2^3: whiteLeft -- NOT IMPLEMENTED ON MY HARDWARE YET --
+    gl_tinkerkit |= tinkerkitWhiteSwitches(readTinkerkitInput(INPUT_A)) << 2; // 2^2 - 2^3: whiteLeft
     gl_tinkerkit |= tinkerkitWhiteSwitches(readTinkerkitInput(INPUT_B)) << 4; // 2^4 - 2^5: whiteRight
 //#if SERIAL_DEBUG
 //    Serial.print("Left Orange = " );
@@ -640,7 +642,7 @@ void loop()
 //    Serial.print(", Right White = ");
 //    Serial.println((gl_tinkerkit & 48) >> 4); // readTinkerkitInput(INPUT_B) << 4
 //#endif
-    
+   
 
     tinkerkitSwitchBit = 1;
     for (i = 0; i < 6; i++) {
