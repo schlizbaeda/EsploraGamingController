@@ -1,0 +1,193 @@
+% chapter2.tex -- de (German)
+\chapter{Bedienungsanleitung}
+\label{cha:manual}
+
+Dieses Kapitel ist eine klassische Bedienungsanleitung für Benutzer, die
+den {\Bezeichnung} mit den aktuell implementierten Funktionen verwenden
+wollen, ohne dabei die Software oder Hardware des Gerätes zu verändern.
+
+\section{Bedienelemente des {\Bezeichnung}s}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{controls_labeled.jpg}
+\caption{Bedienelemente (Sensoren) des {\Bezeichnung}s}
+\label{fig:controls}
+\end{figure}
+
+Die Bedienung von Tastatur und Maus über den {\Bezeichnung} erfolgt über
+folgende Bedienelemente:
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.60\textwidth}|}
+\hline
+\textbf{Nr.}		&	\textbf{Element}	&	\textbf{übliche Funktionalität}\\
+\hline
+		1)			&	Joystick			&	Mausbewegung\\
+\hline
+		2)			&	TinkerKit-Tasten	&	Maustasten, Tastatur\\
+\hline
+		3)			&	Schieberegler		&	Maus-Scrollrad\\
+\hline
+		4)			&	Helligkeitssensor	&	\textit{meist deaktiviert}\\
+\hline
+		5)			&	Cursortasten		&	Tastencodes für Bewegung\\
+\hline
+		6)			&	dreifarbige LED		&	Anzeige der ausgewählten Belegung\\
+\hline
+\end{tabular}
+\vspace{0.5cm}
+\caption{Bedienelemente (Sensoren) des {\Bezeichnung}s}
+\end{table}
+
+\subsection*{Joystick}
+Der Joystick emuliert in den meisten Fällen  Mausbewegungen. Je nach
+Auslenkung des Joysticks wird die Geschwindigkeit der Mausbewegung
+angepasst. Durch Druck auf den Joystick wird ein Klick auf die linke
+Maustaste emuliert.\\
+Auf dem Esplora-Board ist der Joystick über zwei Potentiometer
+umgesetzt, deren Stellung über A/D-Wandler des verbauten 8-bit
+ATMEL-Mikrocontrollers  \textit{ATmega32U4} eingelesen werden. Bei Druck
+auf den Joystick wird ein Drucktaster betätigt, der digital eingelesen
+wird.
+
+\subsection*{TinkerKit-Tasten}
+Auf dem {\Bezeichnung} ist eine kleine Zusatzplatine an der Stelle
+verbaut, an der eigentlich ein kleines Display vorgesehen wäre. Auf
+dieser Zusatzplatine befinden sich sechs Drucktaster, die mit den vier
+TinkerKit-Anschlüssen verbunden sind. Die weißen TinkerKit-Anschlüsse
+sind als Analogeingänge realisiert, so dass über eine geschickte
+Spannungsteilerschaltung unterschieden werden kann, welche
+Tastenkombination betätigt ist.\\
+Diese sechs Taster sind mit zusätzlichen Tastaturcodes oder Mausklicks
+belegt.
+
+\subsection*{Schieberegler}
+Der Schieberegler ist ein Potentiometer, das an einem A/D-Wandler des
+ATMEL-Mikro\-con\-trol\-lers angeschlossen ist. Hiermit wird das
+Scrollrad der Maus emuliert.\\
+Bei der Bedienung reicht das Loslassen des Reglers natürlich nicht, um
+das emulierte Scrollrad zu stoppen! Vielmehr muss zum Anhalten des
+Scrollvorgangs der Regler kurz in die Gegenrichtung geschoben werden.
+
+\subsection*{Helligkeitssensor}
+Auch der Helligkeitssensor ist an einem A/D-Wandler des 
+ATMEL-Mikrocontrollers angeschlossen. Trotz einiger Versuche konnte der
+Helligkeitssensor nicht so implementiert werden, dass er wirklich
+eindeutige Signale im Sinne einer Betätigung liefert. Durch leichte
+Abschattungen entstehen Fehlinterpretationen. Dennoch ist er nach wie
+vor im Arduino-Sketch als Bedienelement enthalten. Er ist allerdings in
+den meisten Einstellungen deaktiviert.
+
+\subsection*{Cursortasten}
+Hierbei handelt es sich um vier Drucktaster, die vom 
+ATMEL-Mikrocontroller digital eingelesen werden. Sie emulieren in der
+Regel Tastaturbefehle für die Cursorsteuerung oder zur Bewegung einer
+Spielfigur, was in vielen Computerspielen mit den Tasten A, W, S und D
+erfolgt.
+
+\subsection*{dreifarbige LED}
+Die dreifarbige LED dient als einfache Anzeige der ausgewählten
+Belegung, siehe Abschnitt \ref{sect:assignment}
+
+
+\section{Belegung der Bedienelemente auswählen}
+\label{sect:assignment}
+Durch gleichzeitiges Betätigen \textbf{aller vier Cursortasten} wird in
+den Einstellmodus des {\Bezeichnung}s gewechselt. Anschließend können
+mit den Cursortasten OBEN und UNTEN die Belegungen der Steuerelemente
+geändert werden. Mit jedem Druck ändert sich die Farbe der dreifarbigen
+LED entsprechend der aktuell gewählten Einstellung.\\
+Durch erneutes Betätigen aller vier Cursortasten wird der Einstellmodus
+wieder verlassen. Um beim Verlassen ein versehentliches Ändern der
+Einstellung zu verhindern, wird empfohlen, beim Betätigen mit den
+Cursortasten LINKS oder RECHTS zu beginnen.
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{0.05\textwidth}|p{0.15\textwidth}|p{0.70\textwidth}|}
+\hline
+\textbf{Nr.}		&	\textbf{LED-Farbe}		&	\textbf{Bezeichnung}\\
+\hline
+		0)			&	\textit{"`dunkelweiß"'}	&	common 1\\
+\hline
+		1)			&	rot						&	MinecraftPi\\
+\hline
+		2)			&	grün					&	yamuplay \textit{t.b.d. (to be defined)}\\
+\hline
+		3)			&	gelb					&	<<undefined 3>>\\
+\hline
+		4)			&	blau					&	<<undefined 4>>\\
+\hline
+		5)			&	violett					&	<<undefined 5>>\\
+\hline
+		6)			&	türkis					&	<<undefined 6>>\\
+\hline
+		7)			&	weiß					&	common 2\\
+\hline
+\end{tabular}
+\vspace{0.5cm}
+\caption{Die acht Belegungen der Bedienelemente des {\Bezeichnung}s}
+\end{table}
+ 
+\uline{\textbf{common 1: } LED: "`dunkelweiß"' (sie leuchtet nur sehr schwach)}\\
+In dieser Einstellung emulieren die Bedienelemente ausschließlich
+Tastatureingaben. Es sind keine Mausfunktionen aktiv:
+
+\begin{tabular}{ll}
+	Joystick			&	Cursortasten\\
+	Joystick Druck		&	ENTER-Taste\\
+	Schieberegler		&	Bild-Auf, Bild-Ab\\
+	Helligkeitssensor	&	\textit{deaktiviert}\\
+	TinkerKit orange	&	Leertaste, ESC-Taste\\
+	TinkerKit weiß		&	SHIFT, CTRL, ALT\\
+\end{tabular}
+
+	
+\uline{\textbf{MinecraftPi: } LED: rot}\\
+Die Belegung ist auf das Spiel \textit{MinecraftPi} für den {\RPi}
+ausgelegt.
+
+\begin{tabular}{ll}
+	Joystick			&	Mausbewegung zur Einstellung der Blickrichtung\\
+	Joystick Druck		&	Taste \texttt{E} zum Öffnen des Block-Menüs\\
+	Schieberegler		&	Scrollrad der Maus zur Schnellauswahl von Blöcken\\
+	Helligkeitssensor	&	\textit{deaktiviert}\\
+	TinkerKit orange	&	linke und rechte Maustasten\\
+	TinkerKit weiß		&	ENTER, SHIFT, ESC, Leertaste\\
+\end{tabular}
+	
+	
+\uline{\textbf{yamuplay: } LED: grün}\\
+Hier ist geplant, eine Belegung zur Steuerung von {\autor}s
+Mediaplayer \textit{yamuplay.py} zu implementieren.\\
+\url{https://github.com/schlizbaeda/yamuplay}
+
+Die hinterlegte Belegung ist derzeit undefiniert!
+
+\uline{\textbf{<<undefined 3>>: } LED: gelb}\\
+Die hinterlegte Belegung ist derzeit undefiniert!
+
+\uline{\textbf{<<undefined 4>>: } LED: blau}\\
+Die hinterlegte Belegung ist derzeit undefiniert!
+
+\uline{\textbf{<<undefined 5>>: } LED: violett}\\
+Die hinterlegte Belegung ist derzeit undefiniert!
+
+\uline{\textbf{<<undefined 6>>: } LED: türkis}\\
+Die hinterlegte Belegung ist derzeit undefiniert!
+
+\uline{\textbf{common 2: } LED: weiß}\\
+In dieser Einstellung emulieren die Bedienelemente Tastatur- und
+Mauseingaben:
+
+\begin{tabular}{ll}
+	Joystick			&	Mausbewegung\\
+	Joystick Druck		&	Maus: Linksklick\\
+	Schieberegler		&	Maus: Scrollrad\\
+	Helligkeitssensor	&	\textit{deaktiviert}\\
+	TinkerKit orange	&	linke und rechte Maustasten\\
+	TinkerKit weiß		&	SHIFT, CTRL, ALT\\
+\end{tabular}

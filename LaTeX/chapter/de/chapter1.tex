@@ -1,0 +1,119 @@
+% chapter1.tex -- de (German)
+\chapter{Einleitung}
+
+Vielen Dank für Ihr Interesse an {\autor}s {\Bezeichnung}.\\
+Hierbei handelt es sich um ein Steuergerät für PCs, das Tastatur- und
+Mausaktionen emulieren kann und den Steuergeräten (Gaming Controllern)
+der diversen Spielekonsolen nachempfunden ist. Es basiert auf dem 
+Arduino-Board \textit{Esplora}, das technisch einem \textit{Arduino 
+Leonardo} entspricht, aber bereits einige Sensoren und Aktoren enthält
+und dessen Leiterplatte grob die Form eines Gaming Controllers aufweist.
+
+\url{https://store.arduino.cc/arduino-esplora}
+
+\section{Rechtliche Hinweise}
+Bei der Konzeption des {\Bezeichnung}s wurde darauf geachtet, nur
+Software zu verwenden, die unter einer freien Lizenz wie GNU GPL oder
+Ähnlichem zur Verfügung gestellt wird oder ganz in die 
+\textit{Gemeinfreiheit} (engl. \textit{public domain}) entlassen wurde.
+
+\subsection*{Marken}
+Einige Bezeichnungen in dieser Schrift können Marken sein, deren
+Benutzung durch Dritte für deren Zwecke die Rechte der Inhaber verletzen
+können.
+
+\subsection*{Links}
+In dieser Bedienungsanleitung sind Links zu externen Seiten im Internet 
+enthalten. Diese Inhalte macht sich der Verfasser {\autor} trotz
+Verlinkung nicht zu eigen, da sie nicht in seinem Einflussbereich
+stehen! Zum Zeitpunkt der Verlinkung waren keine rechtswidrigen Inhalte
+erkennnbar. Eine ständige Überprüfung auf etwaige rechtsverstoßende
+Änderungen ist dem Verfasser nach geltendem Recht nicht zuzumuten.\\
+Sollten aktuelle oder künftige Inhalte jedoch rechtswidrig sein, so kann
+der Autor darüber per e-mail an \url{mailto:himself@schlizbaeda.de}
+informiert werden. Es werden dann entsprechende Maßnahmen zur
+Beseitigung des/der betroffenen Links ergriffen.
+
+\subsection*{Lizensierung der Bestandteile des Projektes}
+\uline{Code:}\\
+Die meisten Code-Beispiele werden von Arduino in die Gemeinfreiheit 
+(\textit{public domain}) gestellt und können daher von jeder Person
+verwendet werden. Auch der Code für den {\Bezeichnung} wurde aus den
+Codevorlagen\\
+\url{https://www.arduino.cc/en/Tutorial/EsploraJoystickMouse},\\
+\url{https://www.arduino.cc/en/Tutorial/EsploraKart} und\\
+\url{https://github.com/circuit69/EsploraTinkerkit}\\
+entwicket. Aufgrund zahlreicher Weiterentwicklungen und Anpassungen
+beschloss der Autor jedoch, sein Werk unter der GNU GPL v3 zu
+veröffentlichen:\\
+\url{https://www.gnu.org/licenses/gpl-3.0.en.html}\\
+\includegraphics[height=35px]{GPLv3.png}
+
+\uline{Gehäuse:}\\
+Bei der Internetsuche nach einem passenden Gehäuse wurde schließlich auf
+\\ \url{https://www.thingiverse.com/thing:45880} ein Satz Dateien für
+einen 3D-Druck gefunden, der unter CC BY-NC 3.0 
+(\url{http://creativecommons.org/licenses/by-nc/3.0/}) lizensiert ist,
+also keine kommerzielle Nutzung gestattet.\\
+\includegraphics[height=35px]{CC-BY-NC.png}
+
+
+\subsection*{Bildrechte}
+Alle inhaltlich relevanten Fotos und technischen Abbildungen in diesem
+Dokument stammen vom Verfasser {\autor} selbst und werden hiermit von
+ihm unter der \textit{Creative-Commons}-Li\-zenz \textbf{CC BY-SA 3.0}
+veröffentlicht. Sie dürfen daher von jedem bei Namensnennung des 
+Urhebers in unveränderter oder auch in veränderter Form unter den 
+gleichen Bedingungen weitergegeben werden:\\
+\includegraphics[height=35px]{CC-BY-SA.png}
+
+Das in dieser Dokumentation verwendete Arduino-Logo ist gemeinfrei:\\
+\includegraphics[height=35px]{arduino.png}
+
+
+\section{Hinweis zur neumodernen "`Genderei"' landauf, landab}
+Der Autor {\autor} kann gar nicht oft genug betonen, dass ihm eine
+Gleichbehandlung \textbf{aller} Geschlechter (mittlerweile mehr als 
+zwei) äußerst wichtig ist. Er verurteilt eine Diskriminierung von
+Menschen nur aufgrund ihres Geschlechtes oder anderer
+Nebensächlichkeiten wie ihrer Herkunft etc. aufs Schärfste!
+
+Dennoch -- oder gerade deswegen -- lehnt er die derzeit grassierende
+Unart des sogenannten "`Genderns"' mit sprachlichen Auswüchsen wie 
+"`AnwenderInnen"' oder gar "`Benutzer*innen"' (jetzt neu mit Stern!)
+zugunsten  einer klaren und verständlichen Ausdrucksweise ab. In diesem
+Trend sind selbst Wörter wie "`Abiturienten"' verpönt: Soll man hier
+wirklich gender-gerecht "`Abitu\-rierende"' schreiben? \smiley{wink}
+
+
+\section{Danksagung}
+{\autor} möchte dem Benutzer \textbf{@dale}
+(\url{https://forum-raspberrypi.de/user/23726-dale/}) aus dem deutschen
+Raspberry Pi Forum (\url{https://forum-raspberrypi.de}) seinen Dank 
+aussprechen: Er erklärte sich freundlicherweise bereit, das 
+Esplora-Gehäuse von \url{https://www.thingiverse.com} mit seinem 
+3D-Drucker auszudrucken.
+
+
+\section{Kurzbeschreibung}
+Der {\Bezeichnung} ist ein den Gaming Controllern der gängigen 
+Spielekonsolen nachempfundenes Steuergerät mit USB-Anschluss. Anstelle
+von proprietären Signalen übermittelt dieses Gerät bei Betätigung der
+Bedienelemente entsprechende Tastatur- \bzw Mauskommandos, um damit die
+laufende Software auf dem Computer zu steuern, an dem es über USB2.0
+angeschlossen ist.
+
+Aufgrund seiner quelloffenen und freien Programmierung kann es auf
+beliebige Anwendungen/Szenarien angepasst werden, indem \textit{im 
+Quellcode} den einzelnen Bedienelementen (Sensoren) die gewünschten
+Tastaturcodes oder Mauskommandos zugeordnet werden.
+
+Es können acht verschiedene Belegungen für unterschiedliche
+Anwendungsfälle hinterlegt werden, die im laufenden Betrieb umgeschaltet
+werden können. Die gewählte Einstellung wird über die Farbe der auf dem
+Esplora-Board verbauten dreifarbigen LED angezeigt.
+
+Softwareseitig emuliert der {\Bezeichnung} eine USB-Tastatur und eine
+USB-Maus und kann auf den meisten PC-Betriebssystemen (Windows, 
+GNU/Linux) sowie auf einem {\RPi} unter Raspbian sofort ohne
+Treiberinstallation verwendet werden.

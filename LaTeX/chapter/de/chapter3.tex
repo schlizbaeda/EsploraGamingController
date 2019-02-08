@@ -1,0 +1,266 @@
+% chapter3.tex -- de (German)
+\chapter{Änderung am \Bezeichnung}
+
+In diesem Kapitel wird die Herangehensweise für Änderungen an diesem
+Projekt beschrieben:\\
+Der Hardwareteil beschreibt in erster Linie den Einbau der ergänzten
+Zusatzleiterplatte mit den Tastern für die TinkerKit-Anschlüsse.\\
+Für den Softwareteil wird vorausgesetzt, dass der Leser die Arduino-IDE
+erfolgreich auf seinem PC installiert hat und weiß, wie eine
+Arduino-Baugruppe damit programmiert wird.
+
+\section{Beschreibung der Zusatzplatine für die TinkerKit-Taster}
+\label{sect:TinkerKitBoard}
+Moderne Gaming Controller haben in der Regel mehr als nur die vier
+Cursortasten. Meist sind sogenannte Schultertasten an der Vorderkante
+des Controllers verbaut, die direkt mit den Zeigefingern bedient werden
+können.
+
+Beim {\Bezeichnung} werden die vier TinkerKit-Anschlüsse verwendet, um
+weitere Taster hinzuzufügen. Da die weißen TinkerKit-Anschlüsse auf
+Pins des \textit{ATmega32U4}-Mikrocontrollers verdrahtet sind, die über
+einen 10bit A/D-Wandler eingelesen werden, können pro weißem
+TinkerKit-Anschluss mehrere Taster über entsprechende Spannungsteiler
+\textbf{gleichzeitig} betrieben und unterschieden werden.
+%In Abbildung \ref{fig:fritzing} ist die Verdrahtung der Tasten an den
+%TinkerKit-Anschlüssen dargestellt.
+%
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[width=0.8\textwidth]{fritzing.png}
+%\caption{Verdrahtung der TinkerKit-Anschlüsse}
+%\label{fig:fritzing}
+%\end{figure}
+
+Auf dem ersten Prototypen der Zusatzplatine wurden an jedem analogen
+TinkerKit-Anschluss (weiß) jeweils zwei Taster mit den Spannungsteilern
+33k : 22k \bzw 33k : 47k angeschlossen. Dies resultiert in folgenden
+Spannungen und A/D-Werten:
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{p{0.20\textwidth}p{0.20\textwidth}p{0.20\textwidth}}
+	\textbf{Taster}	&	\textbf{A/D-Wert}	&	\textbf{Spannung}\\
+	kein Taster		&	1023				&	5,00V\\
+	47k-Taster		&	601					&	2,94V\\
+	22k-Taster		&	410					&	2,00V\\
+	beide Taster	&	320					&	1,56V\\
+\end{tabular}
+\vspace{0.5cm}
+\caption{A/D-Werte der TinkerKit-Taster}
+\end{table}
+
+Die folgenden Bilder zeigen den Anschluss des Prototyps. Im Anhang ist
+das Schaltungskonzept sowie eine Leiterplatte dargestellt, die bis zu
+sechs Taster an den weißen TinkerKit-Anschlüssen ermöglichen.
+ 
+\newpage
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.85\textwidth]{esplora01.jpg}
+\caption{Arduino Esplora und TinkerKit-Zusatzplatine (Prototyp)}
+\label{fig:esplora01}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.85\textwidth]{esplora02.jpg}
+\caption{Widerstände der TinkerKit-Zusatzplatine}
+\label{fig:esplora02}
+\end{figure}
+
+\newpage
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.85\textwidth]{esplora03.jpg}
+\caption{Anschluss der TinkerKit-Zusatzplatine am Arduino Esplora}
+\label{fig:esplora03}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.85\textwidth]{esplora04.jpg}
+\caption{TinkerKit-Zusatzplatine eingebaut}
+\label{fig:esplora04}
+\end{figure}
+
+
+
+\newpage
+\section{Beschreibung des Arduino-Sketch für den \Bezeichnung}
+\subsection{Installation der Arduino-IDE}
+Eine vollständige Beschreibung zur Inbetriebnahme des \textit{Arduino
+Web Editors} oder der \textit{Arduino Desktop IDE} findet sich auf der
+Internetseite \url{https://www.arduino.cc/en/Guide/HomePage}. Dabei
+sollte sich jeder Anwender nach eigenem Gusto für eine Variante
+entscheiden.
+
+\subsection{Anpassung des Codes}
+Ein Arduino Esplora Board, das mit dem heruntegeladenen Sketch 
+\texttt{EsploraGamingController.ino} programmiert wird, emuliert eine
+USB-Maus und eine USB-Tastatur, wie in Kapitel \ref{cha:manual} 
+beschrieben.
+
+Die einfachste Art, den Code anzupassen, ist, die Werte der
+zweidimensionalen Arrayvariablen \texttt{gl\_modeKeycodes} den eigenen
+Wünschen gemäß abzuändern und das Arduino Esplora Board neu zu flashen.
+Eine Liste der Tastaturcodes für nicht-ASCII-Zeichen befindet sich in
+der Datei \texttt{Esplora\_ExtendedKeycodes.txt}.\\
+Der Wert 0 bedeutet dabei, dass die im Code vorgesehene
+\textbf{Mausbelegung} für das entsprechende Bedienelement verwendet
+wird:
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+\hline
+\textbf{Bedienelement}	&	\textbf{Mausbelegung bei Wert 0}\\
+\hline
+	Joystickbewegung	&	Mausbewegung\\
+\hline
+	Joystick Druck		&	Linksklick\\
+\hline
+	TinkerKit orange	&	Linksklick, Rechtsklick\\
+\hline
+	TinkerKit weiß		&	\textbf{keine Mausfunktionalität!}\\
+\hline
+	Schieberegler		&	Scrollrad\\
+\hline
+	Helligkeitssensor	&	Rechtsklick\\
+\hline
+	Cursortasten		&	\textbf{keine Mausfunktionalität!}\\
+\hline
+\end{tabular}
+\vspace{0.5cm}
+\caption{Standardmausbelegungen der Bedienelemente}
+\end{table}
+
+Um ein Bedienelement ganz zu deaktivieren, muss ihm der Wert 255 (\bzw
+die Konstante \texttt{FUNCT\_DISABLED}) zugewiesen werden.
+
+Die analogen Bedienelemente liefern einen Wert zwischen 0 und 1023, da
+sie über einen 10-bit A/D-Wandler eingelesen werden. Beim Joystick
+bestimmen die ausgelesenen 10-bit-Werte die Geschwindigkeit der
+Mausbewegung. Gleiches gilt bei der Definition von Tastaturcodes für den
+Joystick: Hier wird die Wiederholrate der entsprechenden Taste ebenfalls
+von der Joystickauslenkung bestimmt.\\
+Der Schieberegler emuliert die Drehung des Scrollrades der Maus. Auch
+hier bestimmt die Auslenkung die Geschwindigkeit der Scrollbefehle. Um
+das Scrolling zu stoppen, muss der Schieberegler nur leicht zurück in
+Richtung Mitte geschoben werden. Dies funktioniert sogar dann, wenn der
+ausgelesene Wert an sich ein Scrolling bewirken würde. Relevant ist hier
+das leichte Zurückschieben des Reglers.\\
+Bei den weißen TinkerKit-Tasten wird der Analogeingang dafür verwendet,
+eine Kombination aus jeweils zwei Tasten pro TinkerKit-Anschluss zu
+ermitteln. Dies wird auf der Zusatzleiterplatte durch eine passende
+Kombination von Spannungsteilern ermöglicht. Die Genzwerte sind in der
+Arrayvariablen \texttt{TINKERKIT\_LEVEL} definiert. Dabei ist darauf zu
+achten, dass die angegebenen Grenzwerte die Mittelwerte der jeweiligen
+Tastendrucke sind, um eine sichere Auswertung zu gewährleisten.\\
+Der Helligkeitssensor liefert ebenfalls einen 10-bit-Wert. Allerdings
+kann er nur schwer für Betätigungsaktionen verwendet werden: Bereits
+kleine Änderungen der Beleuchtungsverhältnisse, die durch versehentliche
+Abdeckung des Sensors oder Drehen des ganzen Controllers verursacht
+werden, führen zu fehlerhaften Aktionen. Daher wird empfohlen, den
+Helligkeitssensor nicht zu verwenden und zu deaktivieren.
+
+\subsection{Aufbau des Codes}
+In diesem Abschnitt wird auf die wichtigsten \texttt{\#define}s,
+Variablen und Funktionen des Quellcodes eingegangen:
+
+\subsubsection*{serielle Schnittstelle (UART)}
+Dieser Sketch emuliert neben Tastatur und Maus auch eine
+USB-Schnitt\-stelle mit der Baud\-rate 9600. Unter Windows ist diese
+serielle Schnittstelle im Geräte-Manager als \textit{\textbf{COM<x>}}
+sichtbar, unter GNU/Linux als \texttt{/dev/ttyACM<x>}. \todo{UART 
+vernünftig umsetzen}Derzeit sind die Daten, die über diese serielle
+Schnittstelle zum PC gesendet werden, noch nicht sauber strukturiert!
+
+\subsubsection*{\texttt{\#define}}
+\uline{\texttt{\#define SERIAL\_DEBUG}}\\
+Aktivieren/Deaktivieren von Debugmeldungen über die serielle
+Schnittstelle.
+
+\uline{\texttt{\#define LOOP\_DELAY}}\\
+Legt die Wartezeit bei jedem Durchlauf in Millisekunden fest. Je kleiner
+dieser Wert ist, umso schneller reagiert das Arduino Esplora Board auf
+die Änderungen. Dies macht sich vor allem bei der Geschwindigkeit des
+Mauszeigers aufgrund von Joystickbewegungen bemerkbar.\\
+Zu kurze Zeiten wirken sich aufgrund prellender Tasten möglicherweise 
+negativ auf das Verhalten des Boards aus: Gedrückte Tasten werden dann
+mitunter doppelt ausgeführt!
+
+\subsubsection*{Variablen}
+\uline{Variable \texttt{byte gl\_mode}}\\
+Enthält die aktuell ausgewählte Belegung als Zahlenwert zwischen 0 und
+7.
+
+\uline{Arrayvariable \texttt{char* gl\_modeNames[8]}}\\
+Hier sind Bezeichnungen für die acht unterschiedlichen Belegungen
+hinterlegt. Diese Strings werden bei der Auswahl über die serielle
+Schnittstelle ausgegeben.
+
+\uline{zweidimensionale Arrayvariable \texttt{char gl\_modeKeycodes[8][18]}}\\
+Hier werden die Tastatur- / Mauskommandos für die einzelnen
+Bedienelemente eingetragen:\\
+\begin{tabular}{ll}
+0		&	Mauskommando\\
+1-254	&	Tastaturkommando\\
+255		&	deaktiviert\\
+\end{tabular}
+
+\subsubsection*{Funktionen}
+\uline{Funktion \texttt{void setup()}}\\
+Dies ist eine Standardfunktion eines Arduino-Sketches, die über die
+Arduino-Bibliothek eingebunden wird. Sie wird zu Beginn einmalig
+ausgeführt: Initialisierung der Variablen und Kalibrierung der analogen
+Sensoren, insbesondere des Joysticks.
+
+\uline{Funktion \texttt{void loop()}}\\
+Dies ist eine Standardfunktion eines Arduino-Sketches, die über die
+Arduino-Bibliothek eingebunden wird. Sie wird nach \texttt{setup()}
+wiederholt in einer Endlosschleife aufgerufen und dient dem Pollen der
+Sensoren der Bedienelemente.
+
+\uline{Funktion \texttt{void setMode(byte mode)}}\\
+Wählt die angegebene Belegung (0-7) aus:
+\begin{compactitem}
+	\item{Setzt die Variable \texttt{gl\_mode} auf den parametrierten Wert}
+	\item{Setzt die Farbe der dreifarbigen LED}
+	\item{gibt die Bezeichnung der parametrierten Belegung über die serielle Schnittstelle aus.}
+\end{compactitem}
+
+\uline{Funktion \texttt{unsigned int readTinkerkitInput(byte whichInput)}}\\
+Einlesen der TinkerKit-Eingänge über Aufruf der Funktion
+\texttt{readChannel(byte channel)}.
+
+\uline{Funktion \texttt{unsigned int readChannel(byte channel)}}\\
+Diese Funktion überschreibt die gleichlautende Funktion in der
+Arduino-Library \texttt{Esplora}. Das Auslesen der TinkerKit-Signale
+erfolgt über einen Multiplexer-Chip auf dem Arduino Esplora Board.
+
+\uline{Funktion \texttt{byte tinkerkitWhiteSwitches(unsigned int analogue)}}\\
+Auswertung der gedrückten Tastenkombination an den weißen
+TinkerKit-Anschlüssen. Hier ist die Variable \texttt{const unsigned int
+TINKERKIT\_LEVEL[4]} definiert, in der die analogen Grenzwerte für die
+Tastenkombinationen hinterlegt werden. Man findet diese Grenzwerte am
+besten heraus, indem man diese Funktion mit allen Tastenkombinationen
+aufruft und die Messwerte über die serielle Schnittstelle ausgibt. Diese
+Messwerte sollten ziemlich genau in der Mitte zwischen zwei in dieser 
+Arrayvariablen hinterlegten Grenzwerten liegen. Oder andersherum
+gedacht, sollten die Grenzwerte in der Mitte der Messwerte von zwei
+"`benachbarten"' Tastenkombinationen liegen.\\
+Damit diese Funktion vernünftig funktionieren kann, müssen die
+Widerstände für die Spannungsteiler auf der Zusatzleiterplatte richtig
+dimensioniert worden sein!
+
+\section{Ausblick auf geplante Erweiterungen}
+\begin{enumerate}
+\item{Änderung der Tastenbelegung durch den Anwender über das Gerät
+      selbst,\\ohne Programmierung über die Arduino IDE}
+\item{Speichern der Tastenbelegung im EEPROM des \textit{ATmega32U4}}
+\item{Definition mehrerer Tastaturbefehle als Sequenz pro Sensor}
+\item{Definition von Werten für bestimmte Mausaktionen}
+\item{vernünftige Ausgaben für die serielle Schnittstelle festlegen}
+\end{enumerate}
