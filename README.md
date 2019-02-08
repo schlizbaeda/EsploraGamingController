@@ -78,3 +78,12 @@ The two switches on each white TinkerKit connector are distinguished
 by different voltage divider circuits which result in different
 analogue values.
 
+## Remarks
+* An extended manual is added in the sub directory `latex` in English
+  and in German language. A description of this multi lingual
+  conception can be found at https://github.com/schlizbaeda/raspiblaster-manual
+* The file `Arduino_Esplora_Case.zip` contains 3D printer files of the
+  case. They weren't created by me but by JoeyC at 
+  https://www.thingiverse.com/thing:45880/
+  It is licensed under CC BY-NC 3.0 (no commercial use!)
+
